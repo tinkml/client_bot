@@ -1,7 +1,7 @@
-from enum import Enum
+from utils.misc import EnumCommands
 
 
-class AccountCommands(Enum):
+class AccountCommands(EnumCommands):
 
     sign_up = 'Зарегистрироваться'
 

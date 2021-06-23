@@ -1,9 +1,8 @@
-from aiogram import types
+from utils.misc import EnumCommands
+from .accounts.enums import AccountCommands
 
-from accounts.enums import AccountCommands
 
-
-class Commands(AccountCommands):
+class ServiceCommands(EnumCommands):
 
     start = 'Запустить бота'
     help = 'Вывести справку'
@@ -12,7 +11,7 @@ class Commands(AccountCommands):
 async def set_default_commands(dp):
     await dp.bot.set_my_commands(
         [
-            types.BotCommand(x.name, x.value) for x in Commands
-
+            *AccountCommands.get_commands_list(),
+            *ServiceCommands.get_commands_list(),
         ]
     )

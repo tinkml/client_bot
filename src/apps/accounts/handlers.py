@@ -6,10 +6,12 @@ from structlog import get_logger
 
 from initializer import dp, bot
 from . import texts
+from .enums import AccountCommands as cmd
+from .service import AccountService
 from .states import Form
 
 
-@dp.message_handler(commands='register')
+@dp.message_handler(commands=cmd.sign_up.name)
 async def cmd_start(message: types.Message):
     """
     Conversation's entry point
@@ -84,13 +86,11 @@ async def process_gender(message: types.Message, state: FSMContext):
     """
 
     """
-    from apps.models_hub import Account
-    from db.init_db import db
     await state.update_data(gender=message.text)
     data = await state.get_data()
     await state.finish()
 
-    Account(session=db.session, **data).create()
+    await AccountService.create(data=data)
 
     await bot.send_message(
         chat_id=message.chat.id,

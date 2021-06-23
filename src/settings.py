@@ -10,7 +10,7 @@ class Settings(DataBaseSettings):
     SERVER_HOST: str = '127.0.0.1'
     SERVER_PORT: int = 7001
 
-    DOMAIN: str = 'https://c099075e9da8.ngrok.io'
+    DOMAIN: str = ''
     WEBHOOK_PATH: str = '/api/v1'
     WEBHOOK_URL = DOMAIN + WEBHOOK_PATH
 

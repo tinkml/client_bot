@@ -3,7 +3,7 @@ from aiogram.utils.executor import start_webhook
 from apps import handlers_hub
 
 from apps.commands import set_default_commands
-from db.init_db import db
+from db.base import db
 from initializer import dp, bot
 from settings import settings
 
@@ -11,11 +11,11 @@ from settings import settings
 async def on_startup(dispatcher):
     await bot.set_webhook(url=settings.WEBHOOK_URL)
     await set_default_commands(dispatcher)
-    db.init_connection()
+    await db.init_connection()
 
 
 async def on_shutdown(dispatcher):
-    db.session.close()
+    ...
 
 
 if __name__ == '__main__':
