@@ -130,6 +130,7 @@ dmypy.json
 
 # db cache
 /postgresdb
+migrations/versions/*
 
 # PyCharm
 /.idea

@@ -1,6 +1,6 @@
 import os
 
-from db.settings import DataBaseSettings
+from src.db.settings import DataBaseSettings
 
 
 class Settings(DataBaseSettings):

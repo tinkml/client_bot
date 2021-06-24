@@ -4,9 +4,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from structlog import get_logger
 
-from settings import settings
+from src.settings import settings
 
-engine = create_async_engine(settings.get_uri(), echo=True)
+engine = create_async_engine(settings.get_db_uri(), echo=True)
 base = declarative_base()
 
 
@@ -20,10 +20,6 @@ class SqlAlchemy:
         self.logger = get_logger()
 
     async def init_connection(self):
-        from apps import models_hub
-        async with self.engine.begin() as conn:
-            await conn.run_sync(self.base.metadata.create_all)
-
         self.async_session = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
         self.logger.debug('Database connection initialized')
 
