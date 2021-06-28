@@ -9,7 +9,7 @@ from settings import settings
 
 
 async def on_startup(dispatcher):
-    await bot.set_webhook(url=settings.WEBHOOK_URL)
+    await bot.set_webhook(url=settings.get_webhook_url())
     await set_default_commands(dispatcher)
     await db.init_connection()
 

@@ -1,17 +1,30 @@
 version: "3.5"
 
 volumes:
-  postgresdb:
+  postgres:
 
 services:
 
-  postgresdb:
+  postgres:
     image: postgres:latest
-    container_name: postgres_helper
+    container_name: postgres
     ports:
       - "5432:5432"
     env_file:
       - ./.env
     volumes:
-      - ./postgresdb:/var/lib/postgresql/data
+      - ./postgres:/var/lib/postgresql/data
     network_mode: host
+
+  bot:
+    build: .
+    container_name: bot
+    hostname: bot
+    command: python3 /app/src/main.py
+    ports:
+      - "7001:7001"
+    depends_on:
+      - "postgres"
+    env_file:
+      - ./.env
+    network_mode: "host"
