@@ -130,7 +130,8 @@ dmypy.json
 
 # db cache
 /postgres
-migrations/versions/*
+alembic.ini
+migrations/
 
 # PyCharm
 /.idea
